@@ -52,7 +52,7 @@ function renewCacheEntry(
 		});
 }
 
-export const memoize = (fn: Function, opts?: Options) => {
+export function memoize(fn: Function, opts?: Options) {
 	const _opts = Object.assign(
 		{},
 		{
@@ -93,4 +93,4 @@ export const memoize = (fn: Function, opts?: Options) => {
 	};
 
 	return memoizedFn;
-};
+}
