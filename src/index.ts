@@ -10,7 +10,7 @@ export const memoize = (fn: Function, opts?: Options) => {
 	const _opts = Object.assign(
 		{},
 		{
-			maxAge: 1000 * 60 * 5,
+			maxAge: Number.MAX_SAFE_INTEGER * 0.5, // Will be added to Date.now()...
 			matchesKey: arrayIsEqual,
 			rejectRetryDelay: 1000 * 10,
 		},
