@@ -7,6 +7,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc",
+		"prepublishOnly": "tsc",
 		"test": "jest --coverage"
 	},
 	"files": [
