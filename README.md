@@ -61,6 +61,6 @@ the 4th call will get the resolved value.
 
 ## Alternatives <a name="alternatives"></a>
 
-[Moize](https://github.com/planttheidea/moize) offers great performance and has async options but unfortunately not the type of lazy cache renewal I was looking for. And its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know 😉)
+[Moize](https://github.com/planttheidea/moize) offers great performance and has async options but unfortunately no lazy cache renewal. And its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know 😉)
 
-[fast-memoize](https://github.com/caiogondim/fast-memoize.js) - quite possibly currently the fastest memoization library but no special async support and because it stringifies arguments (if you use more than 1), it doesn't play well with anything that doesn't show up in that (such as functions and symbols) out of the box.
+[fast-memoize](https://github.com/caiogondim/fast-memoize.js) - quite possibly the fastest memoization library currently but no special async support. And because it stringifies arguments (if you use more than one), it doesn't play well with anything that doesn't show up in that (such as functions and symbols) - at least not out of the box.
