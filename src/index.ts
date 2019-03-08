@@ -52,7 +52,7 @@ function renewCacheEntry(
 		});
 }
 
-export function memoize(fn: Function, opts?: Options) {
+export function memoize(fn: Function, opts?: Partial<Options>) {
 	const _opts = Object.assign(
 		{},
 		{

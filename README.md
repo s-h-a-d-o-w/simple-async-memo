@@ -1,7 +1,11 @@
+[![Travis Build Status](https://travis-ci.org/s-h-a-d-o-w/simple-async-memo.svg?branch=master)](https://travis-ci.org/s-h-a-d-o-w/simple-async-memo)
+[![npm version](https://img.shields.io/npm/v/simple-async-memo.svg)](https://www.npmjs.com/package/simple-async-memo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # simple-async-memo
 
-A fast (the libraries [mentioned below](#alternatives) may be faster still though),
-minimalistic memoization library with lazy cache renewal specifically for Promise-based usage.
+A minimalistic, reasonably fast (see [alternatives below](#alternatives)) memoization
+library with lazy cache renewal specifically for Promise-based usage.
 
 Rejection is generally considered an unacceptable result. Hence, whenever calling the function
 to be memoized is required (either the initial call or on cache expiration - see `maxAge`),
@@ -25,7 +29,7 @@ function fn(arg1, arg2) {
     return fetch('...');
 }
 
-const memoized = memoize(fn);
+const memoized = memoize(fn); // fn HAS to return a Promise!
 
 memoized('foo', 'bar')
     .then(...)
@@ -57,6 +61,6 @@ the 4th call will get the resolved value.
 
 ## Alternatives <a name="alternatives"></a>
 
-[Moize](https://github.com/planttheidea/moize) offers great performance but unfortunately not the type of lazy cache renewal I was looking for and its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know 😉)
+[Moize](https://github.com/planttheidea/moize) offers great performance and has async options but unfortunately not the type of lazy cache renewal I was looking for. And its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know 😉)
 
-[fast-memoize](https://github.com/caiogondim/fast-memoize.js) - another very minimalistic (thus - no special async support), high performance contender.
+[fast-memoize](https://github.com/caiogondim/fast-memoize.js) - quite possibly currently the fastest memoization library but no special async support and because it stringifies arguments (if you use more than 1), it doesn't play well with anything that doesn't show up in that (such as functions and symbols) out of the box.

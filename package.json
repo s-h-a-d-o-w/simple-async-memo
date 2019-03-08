@@ -1,17 +1,24 @@
 {
 	"name": "simple-async-memo",
+	"description": "Minimalistic, fast async memoization library with lazy cache renewal.",
 	"version": "0.0.1",
 	"main": "lib/index.js",
 	"repository": "https://github.com/s-h-a-d-o-w/simple-async-memo",
 	"author": "Andreas Opferkuch <s-h-a-d-o-w@users.noreply.github.com>",
 	"license": "MIT",
 	"scripts": {
-		"build": "tsc",
-		"prepublishOnly": "tsc",
+		"build": "rimraf ./lib && tsc",
+		"prepublishOnly": "npm run build",
 		"test": "jest --coverage"
 	},
 	"files": [
 		"/lib"
+	],
+	"keywords": [
+		"memoize",
+		"memoization",
+		"promise",
+		"cache"
 	],
 	"devDependencies": {
 		"@babel/core": "7.3.4",
@@ -23,6 +30,7 @@
 		"babel-jest": "24.1.0",
 		"jest": "24.1.0",
 		"prettier": "1.16.4",
+		"rimraf": "2.6.3",
 		"typescript": "3.3.3333"
 	}
 }

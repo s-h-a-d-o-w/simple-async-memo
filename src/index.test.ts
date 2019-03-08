@@ -1,5 +1,22 @@
 import {memoize} from './index';
 
+it('supports functions as arguments', async () => {
+	const functions = {
+		a: () => {},
+		b: () => {},
+		c: () => {},
+	};
+
+	const fn = jest.fn().mockResolvedValue({});
+	const memoized = memoize(fn);
+
+	await memoized(functions.a, functions.b);
+	await memoized(functions.a, functions.b);
+	await memoized(functions.a, functions.c);
+
+	expect(fn).toHaveBeenCalledTimes(2);
+});
+
 it('works and respects maxAge', async () => {
 	const maxAge = 100;
 	const alwaysResolves = jest.fn().mockResolvedValue({});
@@ -51,5 +68,22 @@ it('eventually returns the resolved value even if the initial promise rejected',
 	expect(memoized()).resolves.toBe('Success');
 
 	// 2 calls reach the function that was memoized because of the initial rejected call and the second resolved one
+	expect(fn).toHaveBeenCalledTimes(2);
+});
+
+it('supports Symbols as arguments', async () => {
+	const symbols = {
+		A: Symbol(),
+		B: Symbol(),
+		C: Symbol(),
+	};
+
+	const fn = jest.fn().mockResolvedValue({});
+	const memoized = memoize(fn);
+
+	await memoized(symbols.A, symbols.B);
+	await memoized(symbols.A, symbols.B);
+	await memoized(symbols.A, symbols.C);
+
 	expect(fn).toHaveBeenCalledTimes(2);
 });

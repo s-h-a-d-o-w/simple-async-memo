@@ -8,6 +8,7 @@ devDependencies:
   babel-jest: 24.1.0
   jest: 24.1.0
   prettier: 1.16.4
+  rimraf: 2.6.3
   typescript: 3.3.3333
 packages:
   /@babel/code-frame/7.0.0:
@@ -4311,4 +4312,5 @@ specifiers:
   babel-jest: 24.1.0
   jest: 24.1.0
   prettier: 1.16.4
+  rimraf: 2.6.3
   typescript: 3.3.3333
