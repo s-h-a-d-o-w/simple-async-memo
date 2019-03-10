@@ -7,6 +7,7 @@
 	"author": "Andreas Opferkuch <s-h-a-d-o-w@users.noreply.github.com>",
 	"license": "MIT",
 	"scripts": {
+		"benchmark": "npm run build && node benchmark",
 		"build": "rimraf ./lib && tsc",
 		"prepublishOnly": "npm run build",
 		"test": "jest --coverage"
@@ -28,7 +29,14 @@
 		"@babel/runtime": "7.3.4",
 		"@types/jest": "24.0.9",
 		"babel-jest": "24.1.0",
+		"benchmark": "2.1.4",
+		"cli-table2": "0.2.0",
+		"fast-memoize": "2.5.1",
 		"jest": "24.1.0",
+		"logdown": "3.2.7",
+		"memoizee": "0.4.14",
+		"moize": "5.4.2",
+		"ora": "^0.3.0",
 		"prettier": "1.16.4",
 		"rimraf": "2.6.3",
 		"typescript": "3.3.3333"
