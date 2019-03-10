@@ -59,8 +59,20 @@ the 4th call will get the resolved value.
 
 **Default: shallow comparison of all array elements**
 
-## Alternatives <a name="alternatives"></a>
+## Benchmark & Alternatives <a name="alternatives"></a>
+
+You can run the benchmark by cloning this repo and doing `npm run benchmark`.
+
+The basis is a function that takes two arguments and returns a Promise. For those
+libraries that support it, the "promise" flag was set.
+
+| Name              | Ops/sec.   | Relative margin of error | Sample size |
+| ----------------- | ---------- | ------------------------ | ----------- |
+| moize             | 11,354,469 | ± 1.04%                  | 81          |
+| simple-async-memo | 5,717,515  | ± 0.65%                  | 85          |
+| memoizee          | 1,707,028  | ± 1.83%                  | 79          |
+| fast-memoize      | 971,844    | ± 0.74%                  | 86          |
 
 ![Two parameters](benchmark/result.png)
 
-[Moize](https://github.com/planttheidea/moize) offers great performance and has async options but unfortunately no lazy cache renewal. And its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know 😉)
+[Moize](https://github.com/planttheidea/moize) offers great performance and has async options but unfortunately no lazy cache renewal. And its architecture is structured in a way that doesn't allow for contributing such a feature easily. (If this changes, let me know. 😉)
