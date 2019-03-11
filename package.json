@@ -1,7 +1,7 @@
 {
 	"name": "simple-async-memo",
 	"description": "Minimalistic, fast async memoization library with lazy cache renewal.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"main": "lib/index.js",
 	"repository": "https://github.com/s-h-a-d-o-w/simple-async-memo",
 	"author": "Andreas Opferkuch <s-h-a-d-o-w@users.noreply.github.com>",
