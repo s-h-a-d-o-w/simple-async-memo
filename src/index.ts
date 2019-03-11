@@ -20,9 +20,10 @@ function initCacheEntry(
 ) {
 	return fn
 		.apply(null, args)
-		.then(() => {
+		.then((result: any) => {
 			const innerIdx = findKeyIdx(cache.keys, args, opts.matchesKey);
 			cache.expirations[innerIdx] = Date.now() + opts.maxAge;
+			return result;
 		})
 		.catch((error: any) => {
 			// The initial rejection is passed along but leads to retries

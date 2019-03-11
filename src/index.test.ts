@@ -1,38 +1,27 @@
 import {memoize} from './index';
 
-it('supports functions as arguments', async () => {
-	const functions = {
-		a: () => {},
-		b: () => {},
-		c: () => {},
-	};
-
-	const fn = jest.fn().mockResolvedValue({});
-	const memoized = memoize(fn);
-
-	await memoized(functions.a, functions.b);
-	await memoized(functions.a, functions.b);
-	await memoized(functions.a, functions.c);
-
-	expect(fn).toHaveBeenCalledTimes(2);
-});
-
 it('works and respects maxAge', async () => {
 	const maxAge = 100;
-	const alwaysResolves = jest.fn().mockResolvedValue({});
+	const alwaysResolves = jest.fn().mockResolvedValue(123);
 	const memoized = memoize(alwaysResolves, {maxAge});
 
-	await memoized();
+	expect(memoized()).resolves.toBe(123);
 	expect(alwaysResolves).toHaveBeenCalledTimes(1);
-	await memoized();
+	expect(memoized()).resolves.toBe(123);
 	expect(alwaysResolves).toHaveBeenCalledTimes(1);
 
+	alwaysResolves.mockResolvedValue(234);
 	setTimeout(async () => {
-		await memoized();
+		// First call will still contain old value
+		expect(memoized()).resolves.toBe(123);
 		expect(alwaysResolves).toHaveBeenCalledTimes(2);
-		await memoized();
+
+		// Wait a bit for cache to get lazily updated
+		await new Promise((resolve) => setTimeout(resolve, 100));
+
+		expect(memoized()).resolves.toBe(234);
 		expect(alwaysResolves).toHaveBeenCalledTimes(2);
-	}, maxAge + 10);
+	}, maxAge + 50);
 });
 
 it('keeps retrying if promise rejects', async () => {
@@ -84,6 +73,23 @@ it('supports Symbols as arguments', async () => {
 	await memoized(symbols.A, symbols.B);
 	await memoized(symbols.A, symbols.B);
 	await memoized(symbols.A, symbols.C);
+
+	expect(fn).toHaveBeenCalledTimes(2);
+});
+
+it('supports functions as arguments', async () => {
+	const functions = {
+		a: () => {},
+		b: () => {},
+		c: () => {},
+	};
+
+	const fn = jest.fn().mockResolvedValue({});
+	const memoized = memoize(fn);
+
+	await memoized(functions.a, functions.b);
+	await memoized(functions.a, functions.b);
+	await memoized(functions.a, functions.c);
 
 	expect(fn).toHaveBeenCalledTimes(2);
 });
