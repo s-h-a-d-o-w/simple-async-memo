@@ -4,15 +4,26 @@
 
 # simple-async-memo
 
-A minimalistic, reasonably fast (see [alternatives below](#alternatives)) memoization
+A minimalist, reasonably fast (see [alternatives below](#alternatives)) memoization
 library with lazy cache renewal specifically for Promise-based usage.
 
-Rejection is generally considered an unacceptable result. Hence, whenever calling the function
-to be memoized is required (either the initial call or on cache expiration - see `maxAge`),
-simple-async-memo will retry on every call (but you can also customize the interval at which
-this happens - see `rejectRetryDelay`).
+## Why?
 
-If the initial call results in rejection, this will still be returned though.
+With long running fetches/operations, it may be desirable to always get the cache immediately
+and update it silently in the background. So that the user never has to wait.
+
+While there are already dozens of memoization libraries out there, at least I couldn't
+find one that supports this behavior. Please let me know if there actually is one that's
+already more established than this one.
+
+## General behavior
+
+Rejection is generally considered an unacceptable result. Hence, whenever the cache is being
+refreshed (either the initial call or on cache expiration - see `maxAge`),
+simple-async-memo will keep retrying on rejection (the interval at which this happens can be
+customized - see `rejectRetryDelay`).
+
+If the initial call already results in rejection, it will still be returned though.
 
 ## Installation
 
